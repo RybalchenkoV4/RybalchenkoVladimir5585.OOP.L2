@@ -1,11 +1,13 @@
 public class Cat {
     private String name;
     private int appetite;
-    private boolean satiety = false;
 
-    public boolean getSatiety(){
-        return satiety;
+    public String isSatiety() {
+        String res = satiety ? "full":"hungry";
+        return res;
     }
+
+    private boolean satiety = false;
 
     public Cat(String name, int appetite){
         this.name = name;
@@ -28,7 +30,19 @@ public class Cat {
         this.appetite = appetite;
     }
 
-    public void eat(){
+    public void eat(Plate plate){
+        if(plate.getFood() > appetite) {
+            satiety = true;
+            plate.setFood(plate.getFood() - getAppetite());
+        }
+    }
 
+    @Override
+    public String toString(){
+        String res = satiety ? "full":"hungry";
+        return "Cat: {" +
+                "\n\tname -> " + name +
+                ";\n\tappetite -> " + appetite +
+                ";\n\tsatiety -> " + res + ";\n}";
     }
 }
